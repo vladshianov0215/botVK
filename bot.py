@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import vk_api
 
 def getMessage(val, vk):
@@ -19,19 +20,23 @@ def main():
         return
     vk = vk_session.get_api()
 
-    response = vk.wall.get(count=1)  # Используем метод wall.get
-
-    if response['items']:
-        print(response['items'][0])
-
-
-    #sendMessage('vlad.shianov','huui',vk)
-    #getMessage(vk,val)
+   # response = vk.wall.get(count=1)  # Используем метод wall.get
+#user_id': 478199888 - шутка минутка
+#user_id': 17093571 - дрон
+#
+#
+#
     res = vk.messages.getDialogs()
     if res['items']:
-        print(res['items'][0])
+        for x in range(res['count']):
+            print(res['items'][x])
+            print('\r\n')
+            print(res['items'][x][u'message'])
+            print('\r\n')
+            print(res['items'][x][u'message'][u'user_id'])
+            print('\r\n')
+            print(res['items'][x][u'message'][u'title'])
+            print('\r\n=======================================================\r\n')
 
-
-        
 if __name__ == '__main__':
     main()
