@@ -37,7 +37,7 @@ def main():
                 #надо перенести в отдельный метод проверку на вложение
                 if u'attachments' in res['items'][x][u'message']:
                     for i in range(len(res['items'][x][u'message'][u'attachments'])):
-                        if res['items'][x][u'message'][u'attachments'][i][u'type'] == u'photo':
+                        if res['items'][x][u'message'][u'attachments'][i][u'type'] == u'photo':#u'ext': u'gif'
                             vk.messages.send(peer_id=currentID, message=Joke[random.randint(0, len(Joke)-1)])
                             break
                     else:
