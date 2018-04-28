@@ -1,5 +1,13 @@
 # -*- coding: utf-8 -*-
 import vk_api
+import random
+
+Joke =['ЗАЗАЗАЗ смешная картинка БУгагашечка!',
+       'Ну смешно прям получилось)) ДА да молодец))',
+       'ГЫЫЫЫЫЫЫЫЫЫЫЫЫЫыыыыыыыыыы....',
+       'Лол КЕК )))',
+       'РОФЛ! ЛМАО!']
+
 
 def main():
     login, password = '89528077892', 'asd456asd'
@@ -26,10 +34,14 @@ def main():
                 print(res['items'][x][u'message'],'message')
                 print('\r\n=======================================================\r\n')
 
+                #надо перенести в отдельный метод проверку на вложение
                 if u'attachments' in res['items'][x][u'message']:
-                    if u'type' in res['items'][x][u'message'][u'attachments']:
-                        if res['items'][x][u'message'][u'attachments'][u'type'] == u'photo':
-                             vk.messages.send(peer_id=currentID, message='ЗАЗАЗАЗ смешная картинка БУгагашечка!')
+                    for i in range(len(res['items'][x][u'message'][u'attachments'])):
+                        if res['items'][x][u'message'][u'attachments'][i][u'type'] == u'photo':
+                            vk.messages.send(peer_id=currentID, message=Joke[random.randint(0, len(Joke)-1)])
+                            break
+                    else:
+                        print('одного ответа хватит')
                 vk.messages.markAsRead(peer_id=currentID)
                              
     print('end\r\n')
