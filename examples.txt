@@ -1,0 +1,19 @@
+while True:
+    massages=vk_api.messages.getDialogs(count=20, unread=1)
+   
+    if massages['count']==1:
+        print('Новое письмо', massages)
+        id = massages['items'][0]['message']['user_id']
+        body=massages['items'][0]['message']['body']
+        print(id, body)
+        if body=='bash':
+            r = req.get('http://bash.im/random')
+            doc = html.document_fromstring(r.text)
+            bash = '\n'.join(doc.xpath('//*[@id="body"]/div[3]/div[@class="text"]/text()'))
+            vk_api.messages.send(user_id=id, message=bash)
+            print()
+        else:
+            vk_api.messages.send(user_id=id, message='Если вы введете "bash" то я вышлю вам цитату с bash.im')
+    elif massages['count']==0:
+        print('Новых писем нет')
+    time.sleep(1)
