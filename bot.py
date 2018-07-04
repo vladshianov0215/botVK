@@ -10,7 +10,7 @@ Joke =['ЗАЗАЗАЗ смешная картинка БУгагашечка!',
 
 
 def main():
-    login, password = '89528077892', 'asd456asd'
+    login, password = '', ''
     vk_session = vk_api.VkApi(login, password)
     try:
         vk_session.auth()
